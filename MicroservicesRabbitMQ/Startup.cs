@@ -13,7 +13,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 
-namespace MicroservicesRabbitMQ
+namespace SendListMicroservices
 {
     public class Startup
     {

@@ -1,11 +1,11 @@
 ﻿using MassTransit;
 using Microsoft.AspNetCore.Mvc;
-using Shared.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace MicroservicesRabbitMQ.Controllers
+namespace SendListMicroservices.Controllers
 {
     [ApiController]
     [Route("[controller]")]
@@ -35,24 +35,25 @@ namespace MicroservicesRabbitMQ.Controllers
         public SendController(IBus busService)
         {
             _busService = busService;
+            SendList();
         }
 
-        [HttpPost]
-        public async Task<List<Person>> SendList()
+        public async Task<string> SendList()
         {
             var rngAge = new Random();
-            List<Person> peopleList = new List<Person>();
-            peopleList.Add(new Person(DateTime.Now, "test", rngAge.Next(18, 30), "prof"));
-            peopleList.Add(new Person(DateTime.Now, "test2", rngAge.Next(31, 60), "prof2"));
-            peopleList.Add(new Person(DateTime.Now, "test3", rngAge.Next(61, 90), "prof2"));
-            if (peopleList != null)
+            var p = new Person(DateTime.Now, "Shuki Cohen", rngAge.Next(10,20), "Barber");
+            var p2 = new Person(DateTime.Now, "Dani Cohen", rngAge.Next(20,30), "Barber");
+            var p3 = new Person(DateTime.Now, "Shlomi Cohen", rngAge.Next(30,40), "Barber");
+            Person[] peopleArr =  { p, p2, p3 };
+            //string sJSONResponse = JsonConvert.SerializeObject(list);
+            if (peopleArr != null)
             {
-                Uri uri = new Uri("rabbitmq://localhost/personListQueue");
+                Uri uri = new Uri("rabbitmq://localhost/newQueue");
                 var endPoint = await _busService.GetSendEndpoint(uri);
-                await endPoint.Send(peopleList);
-                return peopleList;
+                await endPoint.Send(peopleArr);
+                return "Sent successefully";
             }
-            return null;
+            return "Error,Not send";
         }
     }
 }

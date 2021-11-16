@@ -7,8 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SendListMicroservices", "Mi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReadListMicroservices", "ReadListMicroservices\ReadListMicroservices.csproj", "{AA4A86B2-1E3F-44DE-B4BB-F40C14F2B21B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared.Models", "Shared.Models\Shared.Models.csproj", "{FEA3221F-D1EC-49C8-8594-B41464D1BD5E}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,10 +21,6 @@ Global
 		{AA4A86B2-1E3F-44DE-B4BB-F40C14F2B21B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AA4A86B2-1E3F-44DE-B4BB-F40C14F2B21B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AA4A86B2-1E3F-44DE-B4BB-F40C14F2B21B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FEA3221F-D1EC-49C8-8594-B41464D1BD5E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FEA3221F-D1EC-49C8-8594-B41464D1BD5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FEA3221F-D1EC-49C8-8594-B41464D1BD5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FEA3221F-D1EC-49C8-8594-B41464D1BD5E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

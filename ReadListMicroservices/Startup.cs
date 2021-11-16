@@ -40,7 +40,7 @@ namespace ReadListMicroservices
                         h.Username("guest");
                         h.Password("guest");
                     });
-                    cur.ReceiveEndpoint("personListQueue", oq =>
+                    cur.ReceiveEndpoint("newQueue", oq =>
                     {
                         //oq.PrefetchCount = 20;
                         //oq.UseMessageRetry(r => r.Interval(2, 100));
