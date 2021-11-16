@@ -1,18 +1,12 @@
-using GreenPipes;
 using MassTransit;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using ReadListMicroservices.Consumers;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+
 
 namespace ReadListMicroservices
 {
@@ -28,22 +22,20 @@ namespace ReadListMicroservices
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
+            //Configure the conectiont to the RabbitMQ server by MassTransit Dependencie injection integration
             services.AddMassTransit(x =>
             {
                 x.AddConsumer<ReadListConsumers>();
                 x.AddBus(provider => Bus.Factory.CreateUsingRabbitMq(cur =>
                 {
-                    cur.UseHealthCheck(provider);
                     cur.Host(new Uri("rabbitmq://localhost"), h =>
                     {
                         h.Username("guest");
                         h.Password("guest");
                     });
-                    cur.ReceiveEndpoint("newQueue", oq =>
+                    //Decelre the Receiver Queue by same name like the same name on the SenderController task
+                    cur.ReceiveEndpoint("MassTransitQueue", oq =>
                     {
-                        //oq.PrefetchCount = 20;
-                        //oq.UseMessageRetry(r => r.Interval(2, 100));
                         oq.ConfigureConsumer<ReadListConsumers>(provider);
                     });
                 }));
